@@ -30,20 +30,20 @@
         <h1 class="text-center">Be careful!Now you are in Transaction area</h1>
         <div class="row">
             <div class="col-md-4"><div class="deposit status"><h5>Deposit</h5> <h2>$<span id="currentDeposit">00</span></h2></div></div>
-            <div class="col-md-4"><div class="withdraw status"><h5>Withdraw</h5><h2>$ <span id="currentWithdrawn">00</span></h2></div></div>
-            <div class="col-md-4"><div class="balance status"><h5>Balance</h5><h2>$ <span id="initialBalance">00</span></h2></div></div>
+            <div class="col-md-4"><div class="withdraw status"><h5>Withdraw</h5><h2>$ <span id="currentWithdraw">00</span></h2></div></div>
+            <div class="col-md-4"><div class="balance status"><h5>Balance</h5><h2>$ <span id="currentBalance">1000</span></h2></div></div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="submit-area"><h2>Deposit</h2>
-                    <input id="inputedAmount" class="form-control" type="text" placeholder="$ amount you want to deposit"><br>
-                    <button id="addDeposit" class="btn btn-success">Deposit</button></div>
+                    <input id="addDeposit" class="form-control" type="text" placeholder="$ amount you want to deposit"><br>
+                    <button id="depositButton" class="btn btn-success">Deposit</button></div>
 
             </div>
             <div class="col-md-6">
                 <div class="submit-area"><h2>Withdraw</h2>
-                    <input id="withdrawnAmount" class="form-control" type="text" placeholder="$ Amount you want to withdraw"><br>
-                    <button id="minusWithdraw" class="btn btn-success">Withdraw</button>
+                    <input id="addWithdraw" class="form-control" type="text" placeholder="$ Amount you want to withdraw"><br>
+                    <button id="withdrawButton" class="btn btn-success">Withdraw</button>
                 </div></div>
         </div>
 
@@ -56,44 +56,43 @@
         loginArea.style.display="none";
         document.getElementById("transaction").style.display="block";})
 
+        
         //deposit button event handler
-document.getElementById("addDeposit").addEventListener('click',function(event){
-   var moneyInputed=document.getElementById("inputedAmount").value;
-       moneyInputed=+moneyInputed;
+        document.getElementById("depositButton").addEventListener('click',function(event){
+            var creditedMoney=getValue("addDeposit");
+            updateSpan("currentDeposit",creditedMoney);
+            updateSpan("currentBalance",creditedMoney);
+            document.getElementById("addDeposit").value='';
+            
 
-       
-       var CurrentDeposit=document.getElementById("currentDeposit").innerText;
-       CurrentDeposit=+CurrentDeposit;
-       var totalDeposit=CurrentDeposit+moneyInputed;
-       document.getElementById("currentDeposit").innerText=totalDeposit;
+        })
 
-       var initialSavings=document.getElementById("initialBalance").innerText;
-       initialSavings=+initialSavings;
-       var totalSavings=initialSavings+moneyInputed;
-       document.getElementById("initialBalance").innerText=totalSavings;
-       document.getElementById("inputedAmount").value='';
-  })
+        //withdraw button event handler
+        document.getElementById("withdrawButton").addEventListener('click',function(event){
+            var debitedmoney=getValue("addWithdraw");
+            updateSpan("currentWithdraw",debitedmoney);
+            updateSpan("currentBalance", -1*debitedmoney);
+            document.getElementById("addWithdraw").value='';
+        })
 
 
-  
-       //withdraw button event handler
-document.getElementById("minusWithdraw").addEventListener('click',function(event){
-    var takaTulchi=document.getElementById("withdrawnAmount").value;
-    takaTulchi=+takaTulchi;
-    var initialSavings=document.getElementById("initialBalance").innerText;
-       initialSavings=+initialSavings;
-       var remaining=initialSavings-takaTulchi;
-       document.getElementById("initialBalance").innerText=remaining;
-       var currentTakatola=document.getElementById("currentWithdrawn").innerText;
-       currentTakatola=+currentTakatola;
-       var motTakatola=currentTakatola+takaTulchi;
-       document.getElementById("currentWithdrawn").innerText=motTakatola;
-       document.getElementById("withdrawnAmount").value=''
 
-    
-    
-})  
-    
+    //some functions will be written in this block
+        function getValue(id){
+            var integerValue=document.getElementById(id).value;
+            integerValue=+integerValue;
+            return integerValue;
+        }
+
+    function updateSpan(id,add){
+            
+            var CURRENTamount=document.getElementById(id).innerText;
+            CURRENTamount=+CURRENTamount;
+            var totalDeposit=CURRENTamount+add;
+            document.getElementById(id).innerText=totalDeposit;
+
+        }
+
 
     </script>
 </body>
