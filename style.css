@@ -1,0 +1,14 @@
+body{padding:100px;font-family: 'Odibee Sans', cursive;}
+.submit-area{
+    margin-top: 30px;padding: 30px;
+    
+    border-radius: 10px;
+    box-shadow: 5px 10px 10px gray;
+
+}
+#transaction{display: none;}
+.row{margin-top: 30px;}
+.status{margin:10px 20px;color:white;padding:20px;border-radius: 10px;}
+.deposit{background-color: slateblue;}
+.withdraw{background-color: lightsalmon;}
+.balance{background-color: orange;}
